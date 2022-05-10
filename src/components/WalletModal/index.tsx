@@ -134,6 +134,7 @@ export default function WalletModal({
 
   const [pendingError, setPendingError] = useState<boolean>()
 
+  // STEP: 钱包弹窗
   const walletModalOpen = useModalOpen(ApplicationModal.WALLET)
   const toggleWalletModal = useWalletModalToggle()
 
@@ -184,7 +185,6 @@ export default function WalletModal({
     if (connector instanceof WalletConnectConnector) {
       connector.walletConnectProvider = undefined
     }
-
     connector &&
       activate(connector, undefined, true).catch(error => {
         if (error instanceof UnsupportedChainIdError) {
@@ -233,7 +233,7 @@ export default function WalletModal({
         }
         return null
       }
-
+      console.log(option)
       // overwrite injected when needed
       if (option.connector === injected) {
         // don't show injected if there's no injected provider
@@ -317,6 +317,7 @@ export default function WalletModal({
         />
       )
     }
+    // STEP: wallet content
     return (
       <UpperSection>
         <CloseIcon onClick={toggleWalletModal}>
@@ -347,6 +348,7 @@ export default function WalletModal({
               tryActivation={tryActivation}
             />
           ) : (
+            // STEP: wallet list
             <OptionGrid>{getOptions()}</OptionGrid>
           )}
           {walletView !== WALLET_VIEWS.PENDING && (

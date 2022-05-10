@@ -26,6 +26,7 @@ export function getNetworkLibrary(): Web3Provider {
   return (networkLibrary = networkLibrary ?? new Web3Provider(network.provider as any))
 }
 
+// STEP: 不同的连接实例
 export const injected = new InjectedConnector({
   supportedChainIds: [1, 3, 4, 5, 42]
 })
