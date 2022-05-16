@@ -57,7 +57,9 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 
   const address = isAddress(tokenAddress)
 
+  // STEP: token contract
   const tokenContract = useTokenContract(address ? address : undefined, false)
+  // TODO: why create Bytes32 token contract?
   const tokenContractBytes32 = useBytes32TokenContract(address ? address : undefined, false)
   const token: Token | undefined = address ? tokens[address] : undefined
 
@@ -104,5 +106,6 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
   const isETH = currencyId?.toUpperCase() === 'ETH'
   const token = useToken(isETH ? undefined : currencyId)
+  // STEP: ETHER = new new Currency(18, 'ETH', 'Ether');
   return isETH ? ETHER : token
 }
